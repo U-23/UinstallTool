@@ -1,3 +1,3 @@
-# UinstallTool
+## UinstallTool
 
-windows软件检测
+windows已安装软件检测
