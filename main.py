@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import *
+from PyQt5.QtWidgets import QApplication
 import sys
 from SoftwareTool import Ui_MainWindow
 from winregeditor import winregeditor

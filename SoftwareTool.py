@@ -81,8 +81,15 @@ class Ui_MainWindow(object):
         self.actionrefresh = QtWidgets.QAction(MainWindow)
         self.actionrefresh.setObjectName("actionrefresh")
         self.actionrefresh.setShortcut('F5')
-        self.actioninterface_language = QtWidgets.QAction(MainWindow)
+
+        self.actioninterface_language = QtWidgets.QMenu(self.menu_3)
         self.actioninterface_language.setObjectName("actioninterface_language")
+        self.action_english = QtWidgets.QAction(MainWindow)
+        self.action_english.setObjectName("action_english")
+        self.action_chinese = QtWidgets.QAction(MainWindow)
+        self.action_chinese.setObjectName("action_chinese")
+       
+
 
     
         self.menu.addAction(self.actionsave)
@@ -98,12 +105,17 @@ class Ui_MainWindow(object):
 
         self.menu_3.addAction(self.actionrefresh)
         self.menu_3.addSeparator()
-        self.menu_3.addAction(self.actioninterface_language)
+        self.menu_3.addMenu(self.actioninterface_language)
+
+        self.actioninterface_language.addAction(self.action_english)
+        self.actioninterface_language.addSeparator()
+        self.actioninterface_language.addAction(self.action_chinese)
+
 
 
         self.menubar.addAction(self.menu.menuAction())
         self.menubar.addAction(self.menu_2.menuAction())
-        self.menubar.addAction(self.menu_3.menuAction())
+        self.menubar.addMenu(self.menu_3)
         self.menubar.addAction(self.menu_4.menuAction())
 
         self.retranslateUi(MainWindow)
@@ -126,7 +138,14 @@ class Ui_MainWindow(object):
         self.actiondelete.setText(_translate("MainWindow", "强制卸载(F)"))
 
         self.actionrefresh.setText(_translate("MainWindow", "刷新(R)"))
-        self.actioninterface_language.setText(_translate("MainWindow", "界面语言"))
+
+        self.actioninterface_language.setTitle(_translate("MainWindow", "界面语言"))
+        self.action_english.setText(_translate("MainWindow", "English"))
+        self.action_chinese.setText(_translate("MainWindow", "Chinese_Simplified(简体中文)"))
+
+        #self.label.setText(_translate("MainWindow", '总共'+str(self.tableWidget.rowCount())+'个软件'))
+        #self.tableWidget.setHorizontalHeaderLabels(_translate("MainWindow", '软件名称','大小','待定'))
+        self.lineEdit.setPlaceholderText(_translate("MainWindow","输入需查找的应用程序"))
 
 
 

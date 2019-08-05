@@ -1,7 +1,6 @@
 from PyQt5.QtWidgets import *
-from PyQt5.QtCore import  QCoreApplication, Qt, pyqtSlot
+from PyQt5.QtCore import  QCoreApplication, Qt, pyqtSlot,QTranslator
 from PyQt5.QtGui import QPixmap,QIcon,QFont
-from PyQt5 import QtWidgets
 from PyQt5 import QtCore
 import win32ui
 import win32gui
@@ -9,7 +8,6 @@ import win32con
 import win32api
 import win32process
 import psutil
-import subprocess
 import re
 from PIL import Image
 from openpyxl.styles import Font, Alignment
@@ -25,8 +23,7 @@ class ShowWindow(Ui_MainWindow, winregeditor,QMainWindow):
         self.getwinreg()
         self.initUI()
         self.init_software()
-       
-        
+ 
 
     def initUI(self):
         self.actionsave.triggered.connect(self.tosaveFile)
@@ -37,6 +34,12 @@ class ShowWindow(Ui_MainWindow, winregeditor,QMainWindow):
         self.actionuninstall.triggered.connect(self.uninstall)
         self.actionwinregLocation.triggered.connect(self.winregLocation)
         self.actionfolderLocation.triggered.connect(self.folderLocation)
+        self.action_english.triggered.connect(self._trigger_english)
+        self.action_chinese.triggered.connect(self._trigger_chinese)
+
+        #翻译家
+        self.trans = QTranslator()
+       
 
     def init_software(self):
         winrege= winregeditor()
@@ -55,8 +58,8 @@ class ShowWindow(Ui_MainWindow, winregeditor,QMainWindow):
         self.label.setFont(QFont("Roman times",10,QFont.Bold))
        
 
-        print(self.tableWidget.rowCount())                          
-        print(self.tableWidget.columnCount())
+        #print(self.tableWidget.rowCount())                          
+        #print(self.tableWidget.columnCount())
 
         #设置列宽度，行宽度
         #self.tableWidget.setColumnWidth(0, 1000)                      
@@ -187,7 +190,6 @@ class ShowWindow(Ui_MainWindow, winregeditor,QMainWindow):
             #self.actionuninstall
             menu.exec_(self.tableWidget.viewport().mapToGlobal(pos))
         
-        
 
     #软件大小
     def software_size(self):
@@ -295,7 +297,7 @@ class ShowWindow(Ui_MainWindow, winregeditor,QMainWindow):
                     
                 except:
                     os.system(UninstallString)
-                return
+                
        
         self.refresh()             
                
@@ -484,6 +486,24 @@ class ShowWindow(Ui_MainWindow, winregeditor,QMainWindow):
         self.numreg=winrege.getwinreg()
         self.init_tableWidget()
 
+    #中英文
+    def _trigger_english(self):
+        #print("[MainWindow] Change to English")
+        self.trans.load("en")
+        _app = QApplication.instance()  # 获取app实例
+        _app.installTranslator(self.trans)
+        # 重新翻译界面
+        self.retranslateUi(self)
+        pass
+    
+    def _trigger_chinese(self):
+        #print("[MainWindow] Change to English")
+        self.trans.load("zh_CN")
+        _app = QApplication.instance()  # 获取app实例
+        _app.installTranslator(self.trans)
+        # 重新翻译界面
+        self.retranslateUi(self)
+        pass
 
     #导出excel表格       
     def tosaveFile(self):
@@ -526,6 +546,7 @@ class ShowWindow(Ui_MainWindow, winregeditor,QMainWindow):
             ws.cell(row=l + 2, column=1, value=h[0][l])
         wb.save(path)
 
+#表格中不显示分割线
 class NoFocusDelegate(QStyledItemDelegate):
     def paint(self, QPainter, QStyleOptionViewItem, QModelIndex):
         if (QStyleOptionViewItem.state & QStyle.State_HasFocus):

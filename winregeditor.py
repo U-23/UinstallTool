@@ -20,6 +20,7 @@ class winregeditor:
 
     def getwinreg(self):
         software_name = list()
+        result = {} 
         try:
             # 定义检测位置
             sub_key = [r'SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall',
@@ -28,7 +29,6 @@ class winregeditor:
             for i in sub_key:
                 key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, i, 0, winreg.KEY_ALL_ACCESS)
                 h = winreg.QueryInfoKey(key)[0]
-                
                 for j in range(0, winreg.QueryInfoKey(key)[0] - 1):
                     DisplayName = ''
                     DisplayIcon = ''
@@ -61,7 +61,6 @@ class winregeditor:
                 k=q+h
                 #将获取到的值重新赋值
                 q = h
-            
         except  IOError:
             pass
         else:
