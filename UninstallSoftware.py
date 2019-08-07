@@ -91,6 +91,11 @@ class ShowWindow(Ui_MainWindow, winregeditor,QMainWindow):
 
         #设置表格整行选中
         self.tableWidget.setSelectionBehavior(QAbstractItemView.SelectRows)
+        '''
+        #实现程序运行后，高亮某行
+        self.tableWidget.setStyleSheet("selection-background-color:rgb(30,144,255)")
+        self.tableWidget.selectRow(0)
+        '''
         
         #按照软件名称排序
         #Qt.DescendingOrder降序
@@ -108,6 +113,7 @@ class ShowWindow(Ui_MainWindow, winregeditor,QMainWindow):
         # 将右键菜单绑定到槽函数generateMenu
         self.tableWidget.customContextMenuRequested.connect(self.generateMenu)
 
+    #默认表头排序设置
     def handleSortIndicatorChanged(self, index, order):
         if index != 0:
             self.tableWidget.horizontalHeader().setSortIndicator(0, self.sortOrder())
@@ -122,6 +128,7 @@ class ShowWindow(Ui_MainWindow, winregeditor,QMainWindow):
             self._sort_order = order
             QtGui.QStandardItemModel.sort(self, column, order)
 
+    #软件名及图表获取
     def dispalyName_Icon(self):
         i = 0
         for key in self.numreg[1].keys() :
@@ -203,7 +210,7 @@ class ShowWindow(Ui_MainWindow, winregeditor,QMainWindow):
                 size = self.getdirsize(exeMenu)
                 size = self.covertsize(size)
             elif InstallLocation == '':
-                size = 0
+                size = "0 MB"
             else:
                 InstallLocation=str(InstallLocation,encoding='utf-8')
                 size = self.getdirsize(InstallLocation)
@@ -489,7 +496,8 @@ class ShowWindow(Ui_MainWindow, winregeditor,QMainWindow):
     #中英文
     def _trigger_english(self):
         #print("[MainWindow] Change to English")
-        self.trans.load("en")
+        self.cwd= os.getcwd()+"\\src_dir\\"
+        self.trans.load(self.cwd+"en")
         _app = QApplication.instance()  # 获取app实例
         _app.installTranslator(self.trans)
         # 重新翻译界面
@@ -498,7 +506,8 @@ class ShowWindow(Ui_MainWindow, winregeditor,QMainWindow):
     
     def _trigger_chinese(self):
         #print("[MainWindow] Change to English")
-        self.trans.load("zh_CN")
+        self.cwd= os.getcwd()+"\\src_dir\\"
+        self.trans.load(self.cwd+"zh_CN")
         _app = QApplication.instance()  # 获取app实例
         _app.installTranslator(self.trans)
         # 重新翻译界面
@@ -514,9 +523,9 @@ class ShowWindow(Ui_MainWindow, winregeditor,QMainWindow):
         file_path, filetype = QFileDialog.getSaveFileName(self,
                                                           "保存为",
                                                           hostname,  # 起始路径
-                                                          "Text Files (*.xlsx);;All Files (*)")
+                                                          "EXCEL Files (*.xlsx);;All Files (*)")
         if file_path == "":
-            print("\n取消选择")
+            #print("\n取消选择")
             return
         else:
             # 将获取到的路径传入toexcel方法

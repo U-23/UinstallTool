@@ -21,7 +21,7 @@ class Ui_MainWindow(object):
         MainWindow.move(400, 50)
         icon = QtGui.QIcon()
         self.cwd = os.getcwd() 
-        icon.addPixmap(QtGui.QPixmap(self.cwd+"\\SoftwareTool.png"), QtGui.QIcon.Normal,
+        icon.addPixmap(QtGui.QPixmap(self.cwd+"\\src_dir\\SoftwareTool.png"), QtGui.QIcon.Normal,
                        QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
