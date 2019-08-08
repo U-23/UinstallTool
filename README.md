@@ -1,6 +1,7 @@
 ![](https://i.imgur.com/FD65VtH.png)
 ---
-检测windows已安装软件。
+检测windows已安装软件。  
+![](https://i.imgur.com/H20qKva.png)
 ### 功能  
 ---  
 - [x] excel表格导出
