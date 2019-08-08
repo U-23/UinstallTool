@@ -1,7 +1,8 @@
 ![](https://i.imgur.com/FD65VtH.png)
 ---    
+检测windows已安装软件。  
 ![](https://i.imgur.com/H20qKva.png)  
-检测windows已安装软件。
+
 
 功能  
 ---
