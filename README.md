@@ -1,9 +1,10 @@
 ![](https://i.imgur.com/FD65VtH.png)
+---    
+![](https://i.imgur.com/H20qKva.png)  
+检测windows已安装软件。
+
+功能  
 ---
-检测windows已安装软件。  
-![](https://i.imgur.com/H20qKva.png)
-### 功能  
----  
 - [x] excel表格导出
 - [x] 文件夹访问
 - [x] 注册表访问
@@ -15,8 +16,8 @@
 - [ ] 强制卸载功能
 - [ ] 修改功能
 
-### 使用  
----  
+使用  
+---
 需运行在python 3.6 
 
 #### 1. 安装依赖 
@@ -29,6 +30,6 @@ pip install -r requirements.txt
 ```python
 python main.py
 ```
-### 软件包下载
+软件包下载
 ---
 Download exe from [releases](https://github.com/U-23/UinstallTool/releases)
